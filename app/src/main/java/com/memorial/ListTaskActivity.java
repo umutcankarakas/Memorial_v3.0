@@ -1,5 +1,6 @@
 package com.memorial;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
@@ -50,7 +51,7 @@ public class ListTaskActivity extends AppCompatActivity implements AddTaskDialog
 
     //Adapter
     List<Task> taskList = new ArrayList<>();
-    ArrayAdapter adapter;
+    CustomListViewAdapter adapter;
 
     //Database
     private CompositeDisposable compositeDisposable;
@@ -62,20 +63,24 @@ public class ListTaskActivity extends AppCompatActivity implements AddTaskDialog
         setContentView(R.layout.activity_list_task);
         ButterKnife.bind(this);
 
-        //Init
-        compositeDisposable = new CompositeDisposable();
 
+        initialize();
+        fillArrayList((ArrayList<Task>) taskList);
+
+        //Init
+
+        compositeDisposable = new CompositeDisposable();
 
         //Init View
 
-        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,taskList);
-        registerForContextMenu(lstTask);
-        lstTask.setAdapter(adapter);
+        //adapter = new ArrayAdapter(ListTaskActivity.this, taskList);
+
+        //lstTask.setAdapter(adapter);
 
         //Database
         TaskDatabase taskDatabase = TaskDatabase.getInstance(this);//Create database
         taskRepository = TaskRepository.getInstance(TaskDataSource.getInstance((taskDatabase.taskDAO())));
-
+        registerForContextMenu(lstTask);
         //Load all data from Database
         loadData();
 
@@ -91,6 +96,19 @@ public class ListTaskActivity extends AppCompatActivity implements AddTaskDialog
 
     }
 
+    private void initialize() {
+        taskList = new ArrayList<Task>();
+        lstTask = (ListView) findViewById(R.id.lstTasks);
+        adapter = new CustomListViewAdapter(ListTaskActivity.this,(ArrayList<Task>) taskList);
+        lstTask.setAdapter(adapter);
+    }
+
+    private void fillArrayList(ArrayList<Task>tasks) {
+        for (int index = 0; index < 20; index++) {
+            Task task = new Task("Mr. Android " + index, "Nowhere");
+            tasks.add(task);
+        }
+    }
     public void openDialog() {
         AddTaskDialog addTaskDialog = new AddTaskDialog();
         addTaskDialog.show(getSupportFragmentManager(), "add task dialog");
