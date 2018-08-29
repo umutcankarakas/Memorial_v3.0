@@ -1,5 +1,7 @@
 package com.memorial;
 
+import android.arch.lifecycle.ViewModel;
+import android.arch.persistence.room.Ignore;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,9 @@ import android.widget.TextView;
 import com.memorial.Model.Task;
 
 import java.util.ArrayList;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class CustomListViewAdapter extends ArrayAdapter<Task> {
 
@@ -49,10 +54,10 @@ public class CustomListViewAdapter extends ArrayAdapter<Task> {
 
             convertView = inflater.inflate(R.layout.list_view_item, null);
 
-            holder = new ViewHolder();
-            holder.taskCheck = (CheckBox) convertView.findViewById(R.id.task_check);
-            holder.taskTitleLabel = (TextView) convertView.findViewById(R.id.task_title_label);
-            holder.taskDetailLabel = (TextView) convertView.findViewById(R.id.task_detail_label);
+            holder = new ViewHolder(convertView);
+            //holder.taskCheck = (CheckBox) convertView.findViewById(R.id.task_check);
+            //holder.taskTitleLabel = (TextView) convertView.findViewById(R.id.task_title_label);
+            //holder.taskDetailLabel = (TextView) convertView.findViewById(R.id.task_detail_label);
             convertView.setTag(holder);
 
         }
@@ -72,10 +77,14 @@ public class CustomListViewAdapter extends ArrayAdapter<Task> {
     }
 
     //View Holder Pattern for better performance
-    private static class ViewHolder {
-        TextView taskTitleLabel;
-        TextView taskDetailLabel;
-        CheckBox taskCheck;
+    public static class ViewHolder {
+        @BindView(R.id.task_title_label) TextView taskTitleLabel;
+        @BindView(R.id.task_detail_label) TextView taskDetailLabel;
+        @BindView(R.id.task_check) CheckBox taskCheck;
 
+
+        public ViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
     }
 }
