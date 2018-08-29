@@ -98,7 +98,6 @@ public class ListTaskActivity extends AppCompatActivity implements AddTaskDialog
 
     private void initialize() {
         taskList = new ArrayList<Task>();
-        lstTask = (ListView) findViewById(R.id.lstTasks);
         adapter = new CustomListViewAdapter(ListTaskActivity.this,(ArrayList<Task>) taskList);
         lstTask.setAdapter(adapter);
     }

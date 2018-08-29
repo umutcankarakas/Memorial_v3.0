@@ -7,9 +7,11 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.text.Layout;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,7 +46,21 @@ public class AddTaskDialog extends AppCompatDialogFragment{
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String title = editTextTitle.getText().toString();
                         String detail = editTextDetail.getText().toString();
-                        listener.applyTexts(title, detail);
+
+                        if(title.isEmpty()){
+                            Toast toast = Toast.makeText(getActivity(),"Title can't be empty.",Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.BOTTOM,0,100);
+                            toast.show();
+
+                        }
+                        else if(detail.isEmpty()){
+                            Toast toast = Toast.makeText(getActivity(),"Detail can't be empty.",Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.BOTTOM,0,100);
+                            toast.show();
+                        }
+                        else {
+                            listener.applyTexts(title, detail);
+                        }
                     }
                 });
         //editTextTitle = view.findViewById(R.id.edit_title);
