@@ -12,13 +12,15 @@ import android.view.View;
 import android.widget.EditText;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 public class AddTaskDialog extends AppCompatDialogFragment{
-    //@BindView(R.id.edit_title) EditText editTextTitle;
-    //@BindView(R.id.edit_detail) EditText editTextDetail;
+    @BindView(R.id.edit_title) EditText editTextTitle;
+    @BindView(R.id.edit_detail) EditText editTextDetail;
 
-    private EditText editTextTitle;
-    private EditText editTextDetail;
+    //private EditText editTextTitle;
+    //private EditText editTextDetail;
     private AddTaskDialogListener listener;
 
     @Override
@@ -27,6 +29,7 @@ public class AddTaskDialog extends AppCompatDialogFragment{
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.layout_dialog, null);
+        ButterKnife.bind(this, view);
 
         builder.setView(view)
                 .setTitle("New Task")
@@ -44,9 +47,8 @@ public class AddTaskDialog extends AppCompatDialogFragment{
                         listener.applyTexts(title, detail);
                     }
                 });
-
-        editTextTitle = view.findViewById(R.id.edit_title);
-        editTextDetail = view.findViewById(R.id.edit_detail);
+        //editTextTitle = view.findViewById(R.id.edit_title);
+        //editTextDetail = view.findViewById(R.id.edit_detail);
 
         return builder.create();
     }
