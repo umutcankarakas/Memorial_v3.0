@@ -73,6 +73,14 @@ public class CustomListViewAdapter extends ArrayAdapter<Task> {
             holder.taskDetailLabel.setText(task.getDetail());
 
         }
+
+       /* holder.taskCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                final boolean isChecked = holder.taskCheck.isChecked();
+                // Do something here.
+            }
+        });*/
         return convertView;
     }
 

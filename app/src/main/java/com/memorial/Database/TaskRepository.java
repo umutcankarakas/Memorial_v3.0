@@ -53,4 +53,5 @@ public class TaskRepository implements ITaskDataSource{
     public void deleteAllTasks() {
         mLocalDataSource.deleteAllTasks();
     }
+
 }

@@ -32,6 +32,7 @@ import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Scheduler;
@@ -85,15 +86,23 @@ public class ListTaskActivity extends AppCompatActivity implements AddTaskDialog
         loadData();
 
         //Event
-        fab.setOnClickListener(new View.OnClickListener() {
+        /*fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 openDialog();
 
             }
-        });
+        });*/
 
+
+
+    }
+
+
+    @OnClick(R.id.fab)
+    public void dialog(){
+        openDialog();
     }
 
     private void initialize() {

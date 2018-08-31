@@ -20,6 +20,9 @@ public class Task {
     @ColumnInfo(name = "detail")
     private String detail;
 
+    @ColumnInfo(name = "status")
+    private boolean status;
+
     public Task(){
     }
 
@@ -27,6 +30,7 @@ public class Task {
     public Task(String title, String detail) {
         this.title = title;
         this.detail = detail;
+        this.status = false;
     }
 
     @NonNull
@@ -52,6 +56,14 @@ public class Task {
 
     public void setDetail(String detail) {
         this.detail = detail;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     @Override

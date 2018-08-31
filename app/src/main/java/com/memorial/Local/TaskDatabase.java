@@ -11,8 +11,8 @@ import static com.memorial.Local.TaskDatabase.DATABASE_VERSION;
 
 @Database(entities = Task.class,version = DATABASE_VERSION,  exportSchema = false)
 public abstract class TaskDatabase extends RoomDatabase {
-    public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "TASK-Database-Room";
+    public static final int DATABASE_VERSION = 2;
+    public static final String DATABASE_NAME = "TASK-Database-Room2";
 
     public abstract TaskDAO taskDAO();
 
